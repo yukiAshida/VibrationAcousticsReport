@@ -9,10 +9,6 @@
 * settings ... matplotlib設定ファイル
 * report ... 読んだレポートと抄訳（適当）
 
-# Usage
-
-analysis.pyの7行目は自分のフォントファイルに直す
-
 # Link
 
 * [オクターブバンドとか](https://www.cradle.co.jp/tec/column07/028.html)
