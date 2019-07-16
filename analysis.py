@@ -11,11 +11,24 @@ fp = FontProperties(fname=r'C:\Windows\Fonts\ipaexg.ttf', size=20)
 ACCOUSTIC_VELOCITY = 340.29 #音速[m/s]
 AIR_DENSITY = 1.293 #空気密度[kg/m3]
 DENSITY = (7750 + 8050)/2 #鋼の密度[kg/m3]
-FS_START = 100
-FS_END = 6300
+FS_START = 100 #計算する最小周波数
+FS_END = 6300 #計算する最大周波数
 
 # ランダム入射波に対する数値解析
-def allInput(f, thickness):    
+def allInput(f, thickness):
+    """
+    Parameters
+    ------------
+    f: float
+        入力周波数[Hz]
+    thickness: float
+        板厚[m^2]
+    
+    Returns
+    ------------
+    r: float
+        透過損失
+    """
     
     omega = f*2*np.pi  #角周波数
     area_density = DENSITY*thickness #面密度[kg/m2]
@@ -24,16 +37,23 @@ def allInput(f, thickness):
     r = 20*np.log10(logarg) - 10*np.log10(np.log(1+(logarg)**2))
     return r
 
-# プロット成形用
+# プロット
 def plotLoss( ax, x, y, color, label):
-
-    C = color
+    """
+    Parameters
+    ------------
+    x,y: list(float)
+        縦軸，横軸の値
+    color,label: str
+        色（#XXXXXX）, 凡例
+    """
+    
     plot_settings = {
-        "color":C,
+        "color":color,
         "linewidth":3,
         "marker":"o",
         "markerfacecolor":"w",
-        "markeredgecolor":C,
+        "markeredgecolor":color,
         "markersize":10,
         "markeredgewidth":3,
         "label":label
@@ -43,21 +63,36 @@ def plotLoss( ax, x, y, color, label):
 
 # Fs ~ Fe [Hz]の範囲で1/3オクターブバンド中心周波数をリストで返す
 def thirdOctaveBand(Fs=100, Fe=6300):
+    """
+    Parameters
+    ------------
+    Fs, Fe: float
+        周波数[Hz]
+    
+    Returns
+    ------------
+    freq_list: list(float)
+        指定した周波数範囲の1/3オクターブバンドの中心周波数のリスト
+    """
 
-    f_low = Fs
+    # 初期化
+    f_low = f_high = Fs
     freq_list = []
 
-    while True:
+    while f_high <= Fe:
 
+        # 高域遮断周波数を計算
         f_high = f_low*(pow(2,1/3))
+        
+        # 中心周波数
         f_center = round(np.sqrt(f_low*f_high),2)
         freq_list.append(f_center)
+        
+        # 低域遮断周波数を更新
         f_low = f_high
 
-        if f_high > Fe:
-            break
-    
     return freq_list
+
 
 if __name__ == "__main__":
     
