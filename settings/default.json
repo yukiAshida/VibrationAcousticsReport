@@ -1,0 +1,140 @@
+
+{
+    "figure":{
+        "dpi": 72,
+        "figsize": [8,8]
+    },
+
+    "grid":{
+        "on": true,
+        "axis": "both",
+        "which": "major",
+        "alpha": 1,
+        "color": "w",
+        "linestyle": "-",
+        "linewidth": 1.5,
+        "below": true
+    },
+
+    "frame":{
+        "top": false,
+        "bottom": false,
+        "left": false,
+        "right": false,
+        "edgecolor": "k",
+        "facecolor": "#EEEEEE",
+        "linewidth": 1.5
+    },
+
+    "title":{
+        "pad":10,
+        "size":30,
+        "weight":"normal"
+    },
+
+    "label":{
+        "color":"k",
+        "pad":5,
+        "size":20,
+        "weight":"normal"
+    },
+
+    "xtick":{
+        "bottom":false,
+        "top":false,
+        "minor":false,
+
+        "color": "k",
+        "direction": "in",
+        "labelsize":20,
+        "alignment":"center",
+
+        "major.bottom":true,
+        "major.top":false,
+        "major.width":1.5,
+        "major.pad": 10,
+        "major.size": 5,
+        
+        "minor.bottom":true,
+        "minor.top":false,
+        "minor.width":1,
+        "minor.pad":1,
+        "minor.size":1
+    },
+
+    "ytick":{
+        "left":false,
+        "right":false,
+        "minor":false,
+
+        "color":"k",
+        "direction":"in",
+        "labelsize": 20,
+        "alignment":"center",
+
+        "major.left":true,
+        "major.right":false,
+        "major.width":1.5,
+        "major.pad":10,
+        "major.size":5,
+        
+        "minor.left":true,
+        "minor.right":false,
+        "minor.width":1,
+        "minor.pad":1,
+        "minor.size":1
+    },
+
+    "legend":{
+
+        "borderaxespad":0.5,
+        "borderpad":0.4,
+        "edgecolor":"k",
+        "facecolor":"w",
+        "fancybox":true,
+        "fontsize":15,
+        "framealpha":0.8,
+        "handlelength":3,
+        "handletextpad":0.8,
+        "labelspacing":0.5,
+        "loc":"best"
+    },
+
+    "margin":{
+        "x":0.05,
+        "y":0.05
+    },
+
+    "date":{
+        "day":"%Y-%m-%d",
+        "hour":"%m-%d %H",
+        "microsecond":"%M:%S.%f",
+        "minute":"%d %H:%M",
+        "month":"%Y-%m",
+        "second":"%H:%M:%S",
+        "year":"%Y"  
+    },
+
+    "font":{
+        "family":["sans-serif"],
+        "style":"normal"
+    },
+
+    "color":{
+        "default":{
+            "blue":"#4169e1",
+            "green":"#3cb37a",
+            "red":"#d70035",
+            "pink":"#e7609e",
+            "yellow":"#fcc800",
+            
+            "skyblue":"#89c3eb",
+            "teagreen":"#aacf53",
+            "lightgreen":"#00ff7f",
+            "purple":"#8a2be2",
+            "orange":"#f08300"
+            
+        }
+    }
+
+}
