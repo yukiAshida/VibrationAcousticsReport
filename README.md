@@ -6,9 +6,8 @@
 
 * analysis.py ... 数値解析実行ファイル
 * setting.py ... matplotlib設定読込用
-* 資料 ... 透過損失とかオクターブバンドとか調べたやつ
-* 結果 ... 実行結果
 * settings ... matplotlib設定ファイル
+* report ... 読んだレポートと抄訳（適当）
 
 # Usage
 
