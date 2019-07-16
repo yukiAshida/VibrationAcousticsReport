@@ -62,48 +62,44 @@ def thirdOctaveBand(Fs=100, Fe=6300):
 if __name__ == "__main__":
     
     # 板厚 [m]
-    thicknesses = [0.0007, 0.0045]
-    colors = ["#66aa66","#6666aa"]
-    
-    # 計算結果格納リスト
-    results = { str(thickness):[] for thickness in thicknesses }
-    results["fs"] = []
-    results["colors"] = { str(t):c for t,c in zip(thicknesses, colors) }
+    thicknesses = {"d1":0.0007, "d2":0.0045}
 
+    # 計算結果
+    results = {"fs":[], "d1":[], "d2":[]}
+    
+    # 各周波数に対する透過損失を計算・記録
     for f in thirdOctaveBand(FS_START,FS_END):
 
         # 周波数を記録
         results["fs"].append(f)
         
-        # 各板厚に対するランダム入力の透過損失を計算
-        for thickness in thicknesses:
-            r = allInput(f, thickness)
-            results[str(thickness)].append(r)
+        # 各板厚に対するランダム入力の透過損失を計算・記録
+        for dkey, dval in thicknesses.items():
+            r = allInput(f, dval)
+            results[dkey].append(r)
 
-    # Figureを用意
+    # 描画用
     fig = plt.figure()
+    axes = [ fig.add_subplot(1,2,i) for i in (1,2) ]
+    titles = ["透過損失　100～6300Hz","片対数表示"]
+    colors = {"d1":"#66aa66","d2":"#6666aa"}
     
     # 通常プロット，片対数表示
-    for i in range(1,3):
-
-        ax = fig.add_subplot(1,2,i)
+    for i in range(2):
         
         # 板厚ごとにプロット
-        for thickness in thicknesses:
-            color = results["colors"][str(thickness)]
-            plotLoss(ax, results["fs"], results[str(thickness)], color=color, label="d = {0} [mm]".format(thickness*1000))
+        for dkey, dval in thicknesses.items():
+            plotLoss(axes[i], results["fs"], results[dkey], color=colors[dkey], label="d = {0} [mm]".format(dval*1000))
         
-        # 描画設定
-        ax.set_xlabel("周波数 [Hz]", FontProperties=fp)
-        ax.set_ylabel("音響透過損失 [dB]", FontProperties=fp)
-        ax.legend()
+        # 軸周り設定
+        axes[i].set_title(titles[i], FontProperties=fp)
+        axes[i].set_xlabel("周波数 [Hz]", FontProperties=fp)
+        axes[i].set_ylabel("音響透過損失 [dB]", FontProperties=fp)
+        axes[i].legend()
 
-        # 通常 or 片対数
+        # 片対数
         if i==1:
-            ax.set_title('透過損失　100～6300Hz', FontProperties=fp) 
-        else:
-            ax.set_title('片対数表示', FontProperties=fp)
-            ax.grid(which='minor',color='w',linestyle='-')
-            ax.set_xscale('log')
+            axes[i].grid(which='minor',color='w',linestyle='-')
+            axes[i].set_xscale('log')
 
     plt.show()
