@@ -1,7 +1,10 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
 from setting import readSetting
+import sys
+from datetime import datetime
 
 # MATPLOTの描画を綺麗にする（個人用）
 readSetting()
@@ -93,6 +96,18 @@ def thirdOctaveBand(Fs=100, Fe=6300):
 
     return freq_list
 
+def writeCsv(results, columns=["fs","d1","d2"]):
+
+    pdata = pd.DataFrame(results)
+    pdata.columns = columns
+
+    # 日付
+    time_info=datetime.today()
+    day_info="{0}_{1}_{2}_{3}_{4}_{5}".format(time_info.year,time_info.month,time_info.day,time_info.hour,time_info.minute,time_info.second)
+
+    # csv書き出し
+    pdata.to_csv("{0}.csv".format(day_info), encoding="utf8")
+     
 
 if __name__ == "__main__":
     
@@ -112,6 +127,11 @@ if __name__ == "__main__":
         for dkey, dval in thicknesses.items():
             r = allInput(f, dval)
             results[dkey].append(r)
+    
+    # CSV書き出し   
+    if len(sys.argv)>1 and sys.argv[1] in ("-s","--save"):
+        columns = ["fs", "{0} mm".format(thicknesses["d1"]*1000), "{0} mm".format(thicknesses["d2"]*1000)]
+        writeCsv(results, columns)
 
     # 描画用
     fig = plt.figure()

@@ -9,6 +9,23 @@
 * settings ... matplotlib設定ファイル
 * report ... 読んだレポートと抄訳（適当）
 
+# Set Up
+
+Anaconda使ってる人は何も入れなくてok
+
+```
+Python 3.6.4
+Pandas 0.24.2
+Numpy 1.14.2
+Matplotlib 2.2.2
+```
+
+# Usage
+
+python analysis.py --save
+
+CSVが書き出されるので，そのまま使う人はExcelとかで適当にグラフを作って
+
 # Link
 
 * [オクターブバンドとか](https://www.cradle.co.jp/tec/column07/028.html)
